@@ -7,7 +7,9 @@ namespace Cloudflare\TrustedProxies\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Cloudflare\TrustedProxies\Service\CloudflareIpRepository;
 
 class CloudflareTrustedProxiesExtension extends Extension
 {
@@ -26,6 +28,9 @@ class CloudflareTrustedProxiesExtension extends Extension
         $container->setParameter('cloudflare_proxies.cache.pool', $config['cache']['pool']);
         $container->setParameter('cloudflare_proxies.cache.key', $config['cache']['key']);
         $container->setParameter('cloudflare_proxies.cache.ttl', $config['cache']['ttl']);
+
+        $container->getDefinition(CloudflareIpRepository::class)
+            ->setArgument('$cache', new Reference($config['cache']['pool']));
     }
 
     public function getAlias(): string
