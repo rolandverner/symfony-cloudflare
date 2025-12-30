@@ -5,12 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.2] - 2025-12-30
-
-### Fixed
-- Fixed bundle extension alias mismatch by overriding `getContainerExtension()`. This allows using `cloudflare_proxies` as the configuration key instead of the default `cloudflare_trusted_proxies`.
-
-## [1.0.1] - 2025-12-30
+## [1.0.0] - 2025-12-30
 
 ### Added
 - Initial release of the Symfony Cloudflare Trusted Proxies bundle.
@@ -22,5 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for `append` and `override` modes for trusted proxies.
 - Support for custom environment variables for trusted proxies.
 - Unit tests and GitHub Actions CI.
-- Support for PHP 8.4 and PHP 8.5 (experimental).
-- Support for Symfony 8.0 (experimental).
+- Support for PHP 8.1-8.5.
+- Support for Symfony 6.4-8.0.
+
+### Fixed
+- Fixed CI matrix compatibility for PHP 8.1 and Symfony 7+.
+- Fixed bundle extension alias mismatch by overriding `getContainerExtension()`.
