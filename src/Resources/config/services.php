@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $container): void {
     $services->set(CloudflareIpFetcher::class);
 
     $services->set(CloudflareIpRepository::class)
-        ->arg('$cache', service(param('cloudflare_proxies.cache.pool')))
+        ->arg('$cache', service('%cloudflare_proxies.cache.pool%'))
         ->arg('$cacheKey', param('cloudflare_proxies.cache.key'))
         ->arg('$ttl', param('cloudflare_proxies.cache.ttl'));
 
