@@ -76,6 +76,12 @@ php bin/console cloudflare:reload
 php bin/console cloudflare:view
 ```
 
+> [!TIP]
+> While the bundle refreshes the cache automatically on request, it is recommended to set up a cron job to keep the cache warm:
+> ```bash
+> 0 */12 * * * php /path/to/your/project/bin/console cloudflare:reload > /dev/null 2>&1
+> ```
+
 ## Credits
 
 This bundle is inspired by [monicahq/laravel-cloudflare](https://github.com/monicahq/laravel-cloudflare).
