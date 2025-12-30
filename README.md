@@ -36,9 +36,11 @@ cloudflare_proxies:
     proxies_env: CLOUDFLARE_TRUSTED_PROXIES
 
     # Additional proxies to trust (e.g., your local load balancer)
-    extra:
-        - 10.0.0.1
-        - 172.16.0.0/12
+    extra: []
+    # Example:
+    # extra:
+    #     - 10.0.0.1
+    #     - 172.16.0.0/12
 
     # Trusted headers configuration
     trusted_headers:
