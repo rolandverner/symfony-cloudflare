@@ -1,0 +1,24 @@
+cloudflare_proxies:
+    # 'append' (default): adds Cloudflare IPs to existing trusted proxies
+    # 'override': ignores existing trusted proxies and only uses Cloudflare + extras
+    mode: 'append'
+
+    # Custom environment variable to look for additional trusted proxies
+    # Fallback is TRUSTED_PROXIES or SYMFONY_TRUSTED_PROXIES
+    proxies_env: '%env(default:TRUSTED_PROXIES:TRUSTED_PROXIES)%'
+
+    # Extra trusted proxies to add (e.g. local networks)
+    extra: []
+
+    # Trusted headers configuration (defaults to all)
+    # Available: x-forwarded-for, x-forwarded-host, x-forwarded-proto, x-forwarded-port, x-forwarded-prefix
+    trusted_headers:
+        - 'x-forwarded-for'
+        - 'x-forwarded-host'
+        - 'x-forwarded-proto'
+        - 'x-forwarded-port'
+
+    cache:
+        pool: 'cache.app'
+        key: 'cloudflare_proxies.ips'
+        ttl: 86400

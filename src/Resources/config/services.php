@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Cloudflare\TrustedProxies\Command\CloudflareInstallCommand;
 use Cloudflare\TrustedProxies\Command\CloudflareReloadCommand;
 use Cloudflare\TrustedProxies\Command\CloudflareViewCommand;
 use Cloudflare\TrustedProxies\EventSubscriber\TrustProxiesSubscriber;
@@ -36,6 +37,10 @@ return static function (ContainerConfigurator $container): void {
         ->arg('$mode', param('cloudflare_proxies.mode'))
         ->arg('$extraProxies', param('cloudflare_proxies.extra'))
         ->tag('kernel.event_subscriber');
+
+    $services->set(CloudflareInstallCommand::class)
+        ->arg('$projectDir', param('kernel.project_dir'))
+        ->tag('console.command');
 
     $services->set(CloudflareReloadCommand::class)
         ->tag('console.command');
