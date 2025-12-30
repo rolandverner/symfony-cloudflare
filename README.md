@@ -15,9 +15,15 @@ This bundle automatically fetches Cloudflare's IP ranges (IPv4 and IPv6) and con
 composer require rolandverner/symfony-cloudflare
 ```
 
+After installation, you can automatically publish the configuration file to your project:
+
+```bash
+php bin/console cloudflare:install
+```
+
 ## Configuration
 
-The bundle works automatically, but you can customize it in `config/packages/cloudflare_proxies.yaml`:
+You can customize the bundle in `config/packages/cloudflare_proxies.yaml`:
 
 ```yaml
 cloudflare_proxies:
@@ -58,6 +64,9 @@ The bundle hooks into the `kernel.request` event with high priority (2000), so i
 You can manually reload or view the cached IP ranges:
 
 ```bash
+# Install the default configuration file
+php bin/console cloudflare:install
+
 # Force reload Cloudflare IPs into cache
 php bin/console cloudflare:reload
 
