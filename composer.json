@@ -1,0 +1,35 @@
+{
+    "name": "rolandverner/symfony-cloudflare",
+    "description": "Automatically fetch Cloudflare IP ranges and configure Symfony trusted proxies.",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roland Verner"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "symfony/http-foundation": "^6.4|^7.0|^8.0",
+        "symfony/http-kernel": "^6.4|^7.0|^8.0",
+        "symfony/http-client": "^6.4|^7.0|^8.0",
+        "symfony/cache": "^6.4|^7.0|^8.0",
+        "symfony/config": "^6.4|^7.0|^8.0",
+        "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+        "symfony/console": "^6.4|^7.0|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "symfony/phpunit-bridge": "^6.4|^7.0|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cloudflare\\TrustedProxies\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cloudflare\\TrustedProxies\\Tests\\": "tests/"
+        }
+    }
+}

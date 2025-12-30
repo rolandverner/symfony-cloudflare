@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php-version }} - Symfony ${{ matrix.symfony-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
+        symfony-version: ['6.4.*', '7.0.*', '8.0.*']
+        include:
+          - php-version: '8.5'
+            experimental: true
+          - symfony-version: '8.0.*'
+            experimental: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, xml, ctype, iconv
+          coverage: none
+
+      - name: Install Symfony CLI
+        run: |
+          curl -sS https://get.symfony.com/cli/installer | bash
+          export PATH="$HOME/.symfony5/bin:$PATH"
+
+      - name: Download dependencies
+        continue-on-error: ${{ matrix.experimental || false }}
+        run: |
+          composer update --prefer-dist --no-interaction --no-progress
+          composer require "symfony/framework-bundle:${{ matrix.symfony-version }}" --dev --no-update
+          composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Run tests
+        continue-on-error: ${{ matrix.experimental || false }}
+        run: vendor/bin/phpunit
