@@ -55,6 +55,17 @@ cloudflare_proxies:
         pool: cache.app
         key: cloudflare_proxies_ips
         ttl: 86400 # 24 hours
+
+## Environment Variables
+
+By default, the bundle will automatically merge Cloudflare IPs with any proxies defined in your standard Symfony environment variable:
+
+```bash
+# .env
+TRUSTED_PROXIES=127.0.0.1,10.0.0.1
+```
+
+If you prefer to use a custom variable name, you can change `proxies_env` in the configuration.
 ```
 
 ## Usage
