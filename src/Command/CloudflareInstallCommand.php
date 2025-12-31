@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cloudflare\TrustedProxies\Command;
+namespace Cloudflare\Proxy\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -32,8 +32,8 @@ class CloudflareInstallCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $configDir = $this->projectDir . '/config/packages';
-        $targetFile = $configDir . '/cloudflare_proxies.yaml';
-        $sourceFile = __DIR__ . '/../Resources/config/packages/cloudflare_proxies.yaml';
+        $targetFile = $configDir . '/cloudflare_proxy.yaml';
+        $sourceFile = __DIR__ . '/../Resources/config/packages/cloudflare_proxy.yaml';
 
         if (!is_dir($configDir)) {
             $io->error(sprintf('The directory "%s" does not exist. Are you sure you are in a Symfony project?', $configDir));
@@ -41,7 +41,7 @@ class CloudflareInstallCommand extends Command
         }
 
         if (file_exists($targetFile) && !$input->getOption('force')) {
-            $io->warning('The configuration file "config/packages/cloudflare_proxies.yaml" already exists.');
+            $io->warning('The configuration file "config/packages/cloudflare_proxy.yaml" already exists.');
             $io->note('Use --force to overwrite it.');
             return Command::SUCCESS;
         }
@@ -51,7 +51,7 @@ class CloudflareInstallCommand extends Command
             return Command::FAILURE;
         }
 
-        $io->success('Configuration file created: config/packages/cloudflare_proxies.yaml');
+        $io->success('Configuration file created: config/packages/cloudflare_proxy.yaml');
 
         return Command::SUCCESS;
     }

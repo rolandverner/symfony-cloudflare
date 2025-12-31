@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cloudflare\TrustedProxies\Tests\Service;
+namespace Cloudflare\Proxy\Tests\Service;
 
-use Cloudflare\TrustedProxies\Service\TrustedHeadersResolver;
+use Cloudflare\Proxy\Service\TrustedHeadersResolver;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 

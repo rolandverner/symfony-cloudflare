@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cloudflare\TrustedProxies\Tests\Service;
+namespace Cloudflare\Proxy\Tests\Service;
 
-use Cloudflare\TrustedProxies\Service\CloudflareIpFetcher;
+use Cloudflare\Proxy\Service\CloudflareIpFetcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;

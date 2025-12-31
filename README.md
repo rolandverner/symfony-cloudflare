@@ -8,11 +8,21 @@ This bundle automatically fetches Cloudflare's IP ranges (IPv4 and IPv6) and con
 - **Caching**: IP ranges are cached using Symfony Cache to avoid overhead on every request.
 - **Zero Configuration**: Works out of the box with standard Symfony environment variables (`TRUSTED_PROXIES`).
 - **Flexible**: Customizable headers, caching, and merging logic.
+- **Feature Toggle**: Easily enable or disable the bundle via config or environment variables.
 
 ## Installation
 
 ```bash
 composer require rolandverner/symfony-cloudflare
+```
+
+After installation, register the bundle in your `config/bundles.php`:
+
+```php
+return [
+    // ...
+    Cloudflare\Proxy\CloudflareProxyBundle::class => ['all' => true],
+];
 ```
 
 After installation, you can automatically publish the configuration file to your project:
@@ -23,17 +33,20 @@ php bin/console cloudflare:install
 
 ## Configuration
 
-You can customize the bundle in `config/packages/cloudflare_proxies.yaml`:
+You can customize the bundle in `config/packages/cloudflare_proxy.yaml`:
 
 ```yaml
-cloudflare_proxies:
+cloudflare_proxy:
+    # Whether to enable the Cloudflare trusted proxies listener
+    enabled: true
+
     # Mode: 'append' (default) or 'override'
     # 'append' adds Cloudflare IPs to your existing TRUSTED_PROXIES
     # 'override' replaces them entirely
     mode: append
 
     # Optional: custom environment variable for trusted proxies
-    proxies_env: CLOUDFLARE_TRUSTED_PROXIES
+    proxy_env: CLOUDFLARE_TRUSTED_PROXIES
 
     # Additional proxies to trust (e.g., your local load balancer)
     extra: []
@@ -53,7 +66,7 @@ cloudflare_proxies:
     # Cache configuration
     cache:
         pool: cache.app
-        key: cloudflare_proxies_ips
+        key: cloudflare_proxies.ips
         ttl: 86400 # 24 hours
 ```
 
@@ -64,9 +77,12 @@ By default, the bundle will automatically merge Cloudflare IPs with any proxies 
 ```bash
 # .env
 TRUSTED_PROXIES=127.0.0.1,10.0.0.1
+
+# Optional: Disable the bundle features
+CLOUDFLARE_PROXY_ENABLED=false
 ```
 
-If you prefer to use a custom variable name, you can change `proxies_env` in the configuration.
+If you prefer to use a custom variable name, you can change `proxy_env` in the configuration.
 
 ## Usage
 

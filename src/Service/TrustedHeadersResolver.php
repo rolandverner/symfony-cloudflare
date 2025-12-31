@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Cloudflare\TrustedProxies\Service;
+namespace Cloudflare\Proxy\Service;
 
+use Cloudflare\Proxy\Contract\TrustedHeadersResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class TrustedHeadersResolver
+final class TrustedHeadersResolver implements TrustedHeadersResolverInterface
 {
     private const MAP = [
         'x-forwarded-for' => Request::HEADER_X_FORWARDED_FOR,

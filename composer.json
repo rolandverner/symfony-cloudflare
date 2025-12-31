@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Cloudflare\\TrustedProxies\\": "src/"
+            "Cloudflare\\Proxy\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cloudflare\\TrustedProxies\\Tests\\": "tests/"
+            "Cloudflare\\Proxy\\Tests\\": "tests/"
         }
     }
 }

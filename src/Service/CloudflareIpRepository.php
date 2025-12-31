@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Cloudflare\TrustedProxies\Service;
+namespace Cloudflare\Proxy\Service;
 
+use Cloudflare\Proxy\Contract\CloudflareIpFetcherInterface;
+use Cloudflare\Proxy\Contract\CloudflareIpRepositoryInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class CloudflareIpRepository
+final class CloudflareIpRepository implements CloudflareIpRepositoryInterface
 {
     public function __construct(
-        private readonly CloudflareIpFetcher $fetcher,
+        private readonly CloudflareIpFetcherInterface $fetcher,
         private readonly CacheInterface $cache,
         private readonly string $cacheKey,
         private readonly int $ttl,
     ) {
     }
 
-    /**
-     * @return string[]
-     */
     public function getIps(): array
     {
         return $this->cache->get($this->cacheKey, function (ItemInterface $item) {
             $item->expiresAfter($this->ttl);
+
             return $this->fetcher->fetchAll();
         });
     }
