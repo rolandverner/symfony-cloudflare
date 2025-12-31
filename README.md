@@ -66,7 +66,7 @@ cloudflare_proxy:
     # Cache configuration
     cache:
         pool: cache.app
-        key: cloudflare_proxies.ips
+        key: cloudflare_proxy.ips
         ttl: 86400 # 24 hours
 ```
 

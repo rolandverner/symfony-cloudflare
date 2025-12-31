@@ -46,7 +46,7 @@ class Configuration implements ConfigurationInterface
             ->defaultValue('cache.app')
             ->end()
             ->scalarNode('key')
-            ->defaultValue('cloudflare_proxies.ips')
+            ->defaultValue('cloudflare_proxy.ips')
             ->end()
             ->integerNode('ttl')
             ->defaultValue(86400)
