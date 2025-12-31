@@ -7,6 +7,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Cloudflare\Proxy\Command\CloudflareInstallCommand;
 use Cloudflare\Proxy\Command\CloudflareReloadCommand;
 use Cloudflare\Proxy\Command\CloudflareViewCommand;
+use Cloudflare\Proxy\Contract\CloudflareIpFetcherInterface;
+use Cloudflare\Proxy\Contract\CloudflareIpRepositoryInterface;
+use Cloudflare\Proxy\Contract\EnvTrustedProxyResolverInterface;
+use Cloudflare\Proxy\Contract\TrustedHeadersResolverInterface;
 use Cloudflare\Proxy\EventSubscriber\TrustProxySubscriber;
 use Cloudflare\Proxy\Service\CloudflareIpFetcher;
 use Cloudflare\Proxy\Service\CloudflareIpRepository;
@@ -22,16 +26,20 @@ return static function (ContainerConfigurator $container): void {
         ->autoconfigure();
 
     $services->set(CloudflareIpFetcher::class);
+    $services->alias(CloudflareIpFetcherInterface::class, CloudflareIpFetcher::class);
 
     $services->set(CloudflareIpRepository::class)
         ->arg('$cacheKey', param('cloudflare_proxy.cache.key'))
         ->arg('$ttl', param('cloudflare_proxy.cache.ttl'));
+    $services->alias(CloudflareIpRepositoryInterface::class, CloudflareIpRepository::class);
 
     $services->set(EnvTrustedProxyResolver::class)
         ->arg('$proxyEnv', param('cloudflare_proxy.proxy_env'));
+    $services->alias(EnvTrustedProxyResolverInterface::class, EnvTrustedProxyResolver::class);
 
     $services->set(TrustedHeadersResolver::class)
         ->arg('$headerNames', param('cloudflare_proxy.trusted_headers'));
+    $services->alias(TrustedHeadersResolverInterface::class, TrustedHeadersResolver::class);
 
     $services->set(TrustProxySubscriber::class)
         ->arg('$enabled', param('cloudflare_proxy.enabled'))
