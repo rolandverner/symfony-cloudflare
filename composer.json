@@ -1,7 +1,17 @@
 {
     "name": "rolandverner/symfony-cloudflare",
-    "description": "Automatically fetch Cloudflare IP ranges and configure Symfony trusted proxies.",
     "type": "symfony-bundle",
+    "description": "Symfony bundle for Cloudflare integration: trusted proxies, real client IP detection, forwarded headers.",
+    "keywords": [
+        "symfony",
+        "cloudflare",
+        "symfony-bundle",
+        "trusted-proxies",
+        "reverse-proxy",
+        "real-ip",
+        "forwarded-headers",
+        "security"
+    ],
     "license": "MIT",
     "authors": [
         {
