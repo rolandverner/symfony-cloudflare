@@ -94,22 +94,6 @@ cloudflare_proxy:
         key: cloudflare_proxy.ips
         ttl: 86400 # 24 hours
 ```
-cloudflare_proxy:
-    enabled: true
-    mode: append
-    proxy_env: CLOUDFLARE_TRUSTED_PROXIES
-    extra: []
-    trusted_headers:
-        - x-forwarded-for
-        - x-forwarded-host
-        - x-forwarded-proto
-        - x-forwarded-port
-        - forwarded
-    cache:
-        pool: cache.app
-        key: cloudflare_proxy.ips
-        ttl: 86400
-```
 
 ## Environment Variables
 
